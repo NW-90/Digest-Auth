@@ -1,3 +1,5 @@
+
+//ใช้ npm urllib
 const httpClient = require('urllib');
 
 
@@ -11,11 +13,11 @@ function options(step,command,cookie){
     const option = {
         method: 'POST',
         rejectUnauthorized: false,
-        digestAuth:(step=== 0)? "Default User:robotics":'',
+        digestAuth:(step=== 0)? "Default User:robotics":'', 
         content:(command==='start')? "regain=clear&execmode=continue&cycle=once&condition=none&stopatbp=disabled&alltaskbytsp=true":'',        
         headers: {
             "Content-type": "application/x-www-form-urlencoded",
-            "Cookie":(step=== 0)? '': getCookie
+            "Cookie":(step=== 0)? '': getCookie //รับ cookie จาก Inteval รอบแรก
         },
     
     };
@@ -25,7 +27,7 @@ function options(step,command,cookie){
 
 
 function main (){
-
+    // คำสั่ง url ส่งไปหา Robot เพื่อสั่ง start,stop ใน code เขียน วนซ้ำเพื่อทดสอบ cookie
     var url = ["http://127.0.0.1:100/rw/rapid/execution?action=start","http://127.0.0.1:100/rw/rapid/execution?action=stop"];
 
     // var urlStart = "http://127.0.0.1:100/rw/rapid/execution?action=start";
@@ -44,7 +46,7 @@ function main (){
             //console.log(res.headers);
             if (res.statusCode != 401) {
     
-                setCookie = res.headers['set-cookie'];
+                setCookie = res.headers['set-cookie']; //เก็บค่า cookie จากการอ่าน set-cookie ที่ได้รับจาก Robot
                 //console.log(setCookie[0]);
             }
             console.log(data.toString());
@@ -55,7 +57,7 @@ function main (){
         console.log(count)
         
         if (count=== 1){
-            buffer = setCookie;
+            buffer = setCookie;  //วนรอบแรกด้วยการ login จากนั้นรอบที่ 2 ให้เก้บค่า cookie
         }
 
         if(currentUrl===url.length-1){
@@ -75,4 +77,4 @@ function main (){
     }, 2000);
 }
 
-main();
+main(); //ผลทดสอบทำงานได้ Robot start,stop,start,stop....
