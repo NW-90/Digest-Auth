@@ -1,0 +1,18 @@
+{
+  "name": "digest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "digest-fetch": "^1.1.6",
+    "node-digest-auth-client": "^1.0.6",
+    "node-fetch": "^2.6.1",
+    "urllib": "^2.36.1"
+  }
+}
